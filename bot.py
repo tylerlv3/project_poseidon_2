@@ -171,7 +171,21 @@ async def queue(ctx, url):
         queues[server.id] = [player]
     await client.say("Audio Queued.")
 
-
+@client.command(pass_context=True)
+async def bitcoin(ctx):
+    author = ctx.message.author
+    site = 'https://cointelegraph.com/bitcoin-price-index'
+    uClient = uReq(site)
+    pg_html = uClient.read()
+    uClient.close()
+    page_souped = soup(pg_html, "html.parser")
+    bc_price = page_souped.find("div", {"class": "price-value"})
+    bc_volatility = page_souped.find("div", {"class": "day-percent"})
+    bc_price_text = bc_price.get_text()
+    bc_volatility_text = bc_volatility.get_text()
+    await client.say('The current price of Bitcoin is: ' + bc_price_text)
+    await client.say("Change From Yesterday: " + bc_volatility_text)
+    print('A member has used a command')
 
 
 @client.command(pass_context=True)
