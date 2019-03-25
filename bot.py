@@ -11,7 +11,6 @@ import time
 
 TOKEN = 'NTU1NTQ5ODQ3ODgxNzc3MTUz.D2tHxA.DY7FV9ULgEQoH2oUpsxQ69Q7wbY'
 
-extensions = ['rndfacts']
 
 client = commands.Bot(command_prefix='.')
 client.remove_command('help')
