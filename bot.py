@@ -221,7 +221,7 @@ async def ethereum(ctx):
     print('A member has used a command')
 
 @client.command(pass_context=True)
-async def etc(ctx):
+async def eth(ctx):
     author = ctx.message.author
     site = 'https://cointelegraph.com/ethereum-price-index'
     uClient = uReq(site)
