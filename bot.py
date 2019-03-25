@@ -187,7 +187,23 @@ async def bitcoin(ctx):
     await client.say("Change From Yesterday: " + bc_volatility_text)
     print('A member has used a command')
 
+@client.command(pass_context=True)
+async def btc(ctx):
+    author = ctx.message.author
+    site = 'https://cointelegraph.com/bitcoin-price-index'
+    uClient = uReq(site)
+    pg_html = uClient.read()
+    uClient.close()
+    page_souped = soup(pg_html, "html.parser")
+    bc_price = page_souped.find("div", {"class": "price-value"})
+    bc_volatility = page_souped.find("div", {"class": "day-percent"})
+    bc_price_text = bc_price.get_text()
+    bc_volatility_text = bc_volatility.get_text()
+    await client.say('The current price of Bitcoin is: ' + bc_price_text)
+    await client.say("Change From Yesterday: " + bc_volatility_text)
+    print('A member has used a command')
 
+    
 @client.command(pass_context=True)
 async def ethereum(ctx):
     author = ctx.message.author
@@ -204,6 +220,21 @@ async def ethereum(ctx):
     await client.say("Change From Yesterday: " + et_vol_text)
     print('A member has used a command')
 
+@client.command(pass_context=True)
+async def etc(ctx):
+    author = ctx.message.author
+    site = 'https://cointelegraph.com/ethereum-price-index'
+    uClient = uReq(site)
+    pg_html = uClient.read()
+    uClient.close()
+    page_souped = soup(pg_html, "html.parser")
+    et_price = page_souped.find("div", {"class": "price-value"})
+    et_vol = page_souped.find("div", {"class": "day-percent"})
+    et_vol_text = et_vol.get_text()
+    et_price_text = et_price.get_text()
+    await client.say('The current price of Ethereum is: ' + et_price_text)
+    await client.say("Change From Yesterday: " + et_vol_text)
+    print('A member has used a command')
 
 
 client.run(TOKEN)
